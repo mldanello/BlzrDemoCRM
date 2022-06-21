@@ -35,9 +35,7 @@ else
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Address</th>
-                <th>Phone</th>
-                <th>Age</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -45,10 +43,7 @@ else
             {
                 <tr>
                     <td>@contact.Id</td>
-                    <td>@contact.Name</td>
-                    <td>@contact.Address</td>
-                    <td>@contact.Phone</td>
-                    <td>@contact.Age</td>
+                    <td>@contact.DisplayName</td>
                     <td>
                         <a href='/contact/edit/@contact.Id' class="btn btn-outline-dark" role="button">
                             Edit
@@ -67,19 +62,19 @@ else
 
 
 @code {
-    protected List<ContactDetailModel> contactList = new();
-    protected List<ContactDetailModel> searchContactData = new();
-    protected ContactDetailModel contact = new();
+    protected List<ContactDisplayModel> contactList = new();
+    protected List<ContactDisplayModel> searchContactData = new();
+    protected ContactDisplayModel contact = new();
     protected string SearchString { get; set; } = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        await GetContact();
+        await GetContactList();
     }
 
-    protected async Task GetContact()
+    protected async Task GetContactList()
     {
-        contactList = await Http.GetFromJsonAsync<List<ContactDetailModel>>("api/Contact");
+        contactList = await Http.GetFromJsonAsync<List<ContactDisplayModel>>("api/Contact");
         searchContactData = contactList;
     }
 
@@ -88,7 +83,7 @@ else
         if (!string.IsNullOrEmpty(SearchString))
         {
             contactList = searchContactData
-                .Where(x => x.Name.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1)
+                .Where(x => x.DisplayName.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1)
                 .ToList();
         }
         else

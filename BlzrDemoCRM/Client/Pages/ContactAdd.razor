@@ -8,11 +8,25 @@
 <EditForm Model="@contact" OnValidSubmit="SaveContact">
     <DataAnnotationsValidator />
     <div class="mb-3">
-        <label for="Name" class="form-label">Name</label>
+        <label for="FirstName" class="form-label">First Name</label>
         <div class="col-md-4">
-            <InputText class="form-control" @bind-Value="contact.Name" />
+            <InputText class="form-control" @bind-Value="contact.FirstName" />
         </div>
-        <ValidationMessage For="@(() => contact.Name)" />
+        <ValidationMessage For="@(() => contact.FirstName)" />
+    </div>
+    <div class="mb-3">
+        <label for="MiddleName" class="form-label">Middle Name</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="contact.MiddleName" />
+        </div>
+        <ValidationMessage For="@(() => contact.MiddleName)" />
+    </div>
+    <div class="mb-3">
+        <label for="LastName" class="form-label">Last Name</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="contact.LastName" />
+        </div>
+        <ValidationMessage For="@(() => contact.LastName)" />
     </div>
     <div class="mb-3">
         <label for="Address" class="form-label">Address</label>

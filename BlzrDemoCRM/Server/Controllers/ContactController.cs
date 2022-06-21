@@ -17,7 +17,7 @@ namespace BlzrDemoCRM.Server.Controllers
         }
 
         [HttpGet]  
-        public async Task<List<ContactDetailModel>> Get()
+        public async Task<List<ContactDisplayModel>> Get()
         {
             return await Task.FromResult(_IContact.ListContacts());
         }
