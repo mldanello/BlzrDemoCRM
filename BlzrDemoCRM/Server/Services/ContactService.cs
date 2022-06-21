@@ -17,7 +17,7 @@ namespace BlzrDemoCRM.Server.Services
         {
             try
             {
-                return ContactMapper.EntityListToDisplayModelList(_contactRepo.ListContactEntities());
+                return ContactMapper.EntityListToDisplayModelList(_contactRepo.ListContactEntities().OrderBy(c => c.LastName).ToList());
             }
             catch
             {
