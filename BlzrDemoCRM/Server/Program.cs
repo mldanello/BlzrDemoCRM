@@ -1,5 +1,5 @@
-using BlzrDemoCRM.Server.Interfaces;
-using BlzrDemoCRM.Server.Models;
+using BlzrDemoCRM.Server.Data;
+using BlzrDemoCRM.Server.Repositories;
 using BlzrDemoCRM.Server.Services;
 
 using Microsoft.AspNetCore.ResponseCompression;
@@ -12,7 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DatabaseContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddTransient<IContact, ContactManager>();
+
+builder.Services.AddTransient<IContactRepo, ContactRepo>();
+builder.Services.AddTransient<IContactService, ContactService>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

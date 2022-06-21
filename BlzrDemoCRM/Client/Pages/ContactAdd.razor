@@ -49,13 +49,13 @@
     [Parameter]
     public int contactId { get; set; }
     protected string Title = "Add";
-    protected Contact contact = new();
+    protected ContactDetailModel contact = new();
     protected override async Task OnParametersSetAsync()
     {
         if (contactId != 0)
         {
             Title = "Edit";
-            contact = await Http.GetFromJsonAsync<Contact>("api/Contact/" + contactId);
+            contact = await Http.GetFromJsonAsync<ContactDetailModel>("api/Contact/" + contactId);
         }
     }
     protected async Task SaveContact()

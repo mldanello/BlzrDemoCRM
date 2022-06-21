@@ -67,9 +67,9 @@ else
 
 
 @code {
-    protected List<Contact> contactList = new();
-    protected List<Contact> searchContactData = new();
-    protected Contact contact = new();
+    protected List<ContactDetailModel> contactList = new();
+    protected List<ContactDetailModel> searchContactData = new();
+    protected ContactDetailModel contact = new();
     protected string SearchString { get; set; } = string.Empty;
 
     protected override async Task OnInitializedAsync()
@@ -79,7 +79,7 @@ else
 
     protected async Task GetContact()
     {
-        contactList = await Http.GetFromJsonAsync<List<Contact>>("api/Contact");
+        contactList = await Http.GetFromJsonAsync<List<ContactDetailModel>>("api/Contact");
         searchContactData = contactList;
     }
 

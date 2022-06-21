@@ -38,11 +38,11 @@
 @code {
     [Parameter]
     public int contactId { get; set; }
-    Contact contact = new Contact();
+    ContactDetailModel contact = new ContactDetailModel();
 
     protected override async Task OnInitializedAsync()
     {
-        contact = await Http.GetFromJsonAsync<Contact>("/api/Contact/" + Convert.ToInt32(contactId));
+        contact = await Http.GetFromJsonAsync<ContactDetailModel>("/api/Contact/" + Convert.ToInt32(contactId));
     }
 
     protected async Task RemoveContact(int contactId)

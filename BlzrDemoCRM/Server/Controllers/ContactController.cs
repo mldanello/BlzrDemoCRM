@@ -1,4 +1,4 @@
-﻿using BlzrDemoCRM.Server.Interfaces;
+﻿using BlzrDemoCRM.Server.Services;
 using BlzrDemoCRM.Shared.Models;
 
 using Microsoft.AspNetCore.Http;
@@ -10,14 +10,14 @@ namespace BlzrDemoCRM.Server.Controllers
     [ApiController]
     public class ContactController : ControllerBase
     {
-        private readonly IContact _IContact;
-        public ContactController(IContact iContact)
+        private readonly IContactService _IContact;
+        public ContactController(IContactService iContact)
         {
             _IContact = iContact;
         }
 
         [HttpGet]  
-        public async Task<List<Contact>> Get()
+        public async Task<List<ContactDetailModel>> Get()
         {
             return await Task.FromResult(_IContact.ListContacts());
         }
@@ -25,7 +25,7 @@ namespace BlzrDemoCRM.Server.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            Contact contact = _IContact.GetContactById(id);
+            ContactDetailModel contact = _IContact.GetContactById(id);
             if (contact != null)
             {
                 return Ok(contact);
@@ -34,13 +34,13 @@ namespace BlzrDemoCRM.Server.Controllers
         }
 
         [HttpPost]
-        public void Post(Contact contact)
+        public void Post(ContactDetailModel contact)
         {
             _IContact.AddContact(contact);
         }
 
         [HttpPut]
-        public void Put(Contact contact)
+        public void Put(ContactDetailModel contact)
         {
             _IContact.UpdateContact(contact);
         }
