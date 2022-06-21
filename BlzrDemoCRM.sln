@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlzrDemoCRM.Server", "BlzrDemoCRM\Server\BlzrDemoCRM.Server.csproj", "{ADBB72C6-ADD0-4393-8A3E-9CD377170170}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlzrDemoCRM.Server", "BlzrDemoCRM\Server\BlzrDemoCRM.Server.csproj", "{ADBB72C6-ADD0-4393-8A3E-9CD377170170}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlzrDemoCRM.Client", "BlzrDemoCRM\Client\BlzrDemoCRM.Client.csproj", "{D9754C59-6024-4435-8169-12EE0A4AD54C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlzrDemoCRM.Client", "BlzrDemoCRM\Client\BlzrDemoCRM.Client.csproj", "{D9754C59-6024-4435-8169-12EE0A4AD54C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlzrDemoCRM.Shared", "BlzrDemoCRM\Shared\BlzrDemoCRM.Shared.csproj", "{A3A0ACFA-CD15-4508-8350-F23A61AE752F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlzrDemoCRM.Shared", "BlzrDemoCRM\Shared\BlzrDemoCRM.Shared.csproj", "{A3A0ACFA-CD15-4508-8350-F23A61AE752F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
