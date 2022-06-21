@@ -9,7 +9,7 @@ CREATE TABLE [dbo].[Contact](
     [Name] [nvarchar](100) NOT NULL,
     [Address] [nvarchar](500) NULL,
     [Phone] [nvarchar](50) NULL,
-    [Age] [int] NULL,
+    [Age] [nvarchar](10) NULL,
     CONSTRAINT [PK_Contact] PRIMARY KEY CLUSTERED
     (
         [Id] ASC
