@@ -6,10 +6,12 @@ GO
 
 CREATE TABLE [dbo].[Contact](
     [Id] [int] IDENTITY(1,1) NOT NULL,
-    [Name] [nvarchar](100) NOT NULL,
+    [FirstName] [nvarchar](100) NOT NULL,
+	[MiddleName] [nvarchar](100) NOT NULL,
+	[LastName] [nvarchar](100) NOT NULL,
     [Address] [nvarchar](500) NULL,
     [Phone] [nvarchar](50) NULL,
-    [Age] [int] NULL,
+    [Age] [nvarchar](10) NULL,
     CONSTRAINT [PK_Contact] PRIMARY KEY CLUSTERED
     (
         [Id] ASC

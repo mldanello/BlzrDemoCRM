@@ -1,24 +1,23 @@
-﻿using BlzrDemoCRM.Server.Interfaces;
-using BlzrDemoCRM.Server.Models;
+﻿using BlzrDemoCRM.Server.Repositories;
 using BlzrDemoCRM.Shared.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace BlzrDemoCRM.Server.Services
 {
-    public class ContactManager : IContact
+    public class ContactService : IContactService
     {
-        readonly DatabaseContext _dbContext = new();
-        public ContactManager(DatabaseContext dbContext)
+        readonly IContactRepo _contactRepo;
+
+        public ContactService(IContactRepo contactRepo)
         {
-            _dbContext = dbContext;
+            _contactRepo = contactRepo;
         }
 
         // to List all contacts
-        public List<Contact> ListContacts()
+        public List<ContactDisplayModel> ListContacts()
         {
             try
             {
-                return _dbContext.Contacts.ToList();
+                return ContactMapper.EntityListToDisplayModelList(_contactRepo.ListContactEntities().OrderBy(c => c.LastName).ToList());
             }
             catch
             {
@@ -27,11 +26,11 @@ namespace BlzrDemoCRM.Server.Services
         }
 
         // to get a contact
-        public Contact GetContactById(int id)
+        public ContactDetailModel GetContactById(int id)
         {
             try
             {
-                Contact? contact = _dbContext.Contacts.Find(id);
+                ContactDetailModel? contact = ContactMapper.EntityToDetailModel(_contactRepo.GetContactEntityById(id));
                 if (contact != null)
                 {
                     return contact;
@@ -50,31 +49,27 @@ namespace BlzrDemoCRM.Server.Services
 
 
         // to Add new contact
-        public void AddContact(Contact contact)
+        public void AddContact(ContactDetailModel contact)
         {
             try
             {
-                _dbContext.Contacts.Add(contact);
-                _dbContext.SaveChanges();
+                _contactRepo.InsertContactEntity(ContactMapper.DetailModelToEntity(contact));
             }
             catch
             {
-
                 throw;
             }
         }
 
         // to Update a contact
-        public void UpdateContact(Contact contact)
+        public void UpdateContact(ContactDetailModel contact)
         {
             try
             {
-                _dbContext.Entry(contact).State = EntityState.Modified;
-                _dbContext.SaveChanges();
+                _contactRepo.UpdateContactEntity(ContactMapper.DetailModelToEntity(contact));
             }
             catch
             {
-
                 throw;
             }
         }
@@ -85,21 +80,10 @@ namespace BlzrDemoCRM.Server.Services
         {
             try
             {
-                Contact? contact = _dbContext.Contacts.Find(id);
-                if (contact != null)
-                {
-                    _dbContext.Contacts.Remove(contact);
-                    _dbContext.SaveChanges();
-                }
-                else
-                {
-                    throw new ApplicationException($"Could not find Contact for Id: {id}");
-                }
-
+                _contactRepo.DeleteContactEntity(id);
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

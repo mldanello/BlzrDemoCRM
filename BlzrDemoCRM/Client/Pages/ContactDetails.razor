@@ -1,13 +1,13 @@
 ﻿@page "/fetchcontactdetails"
 @using BlzrDemoCRM.Shared.Models
 @inject HttpClient Http
-<h1>Contact Detail</h1>
+<h1>Contacts</h1>
 <p>Blazor CRUD operation</p>
 <div class="row">
     <div class="col-md-6">
         <a href='/contact/add' class="btn btn-primary" role="button">
             <i class="fas fa-user-plus"></i>
-            Add User
+            Add Contact
         </a>
     </div>
     <div class="input-group col">
@@ -35,9 +35,7 @@ else
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Address</th>
-                <th>Phone</th>
-                <th>Age</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -45,16 +43,12 @@ else
             {
                 <tr>
                     <td>@contact.Id</td>
-                    <td>@contact.Name</td>
-                    <td>@contact.Address</td>
-                    <td>@contact.Phone</td>
-                    <td>@contact.Age</td>
+                    <td>@contact.DisplayName</td>
                     <td>
                         <a href='/contact/edit/@contact.Id' class="btn btn-outline-dark" role="button">
                             Edit
                         </a>
-                    </td>
-                    <td>
+
                         <a href='/contact/delete/@contact.Id' class="btn btn-outline-danger" role="button">
                             Delete
                         </a>
@@ -67,19 +61,19 @@ else
 
 
 @code {
-    protected List<Contact> contactList = new();
-    protected List<Contact> searchContactData = new();
-    protected Contact contact = new();
+    protected List<ContactDisplayModel> contactList = new();
+    protected List<ContactDisplayModel> searchContactData = new();
+    protected ContactDisplayModel contact = new();
     protected string SearchString { get; set; } = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        await GetContact();
+        await GetContactList();
     }
 
-    protected async Task GetContact()
+    protected async Task GetContactList()
     {
-        contactList = await Http.GetFromJsonAsync<List<Contact>>("api/Contact");
+        contactList = await Http.GetFromJsonAsync<List<ContactDisplayModel>>("api/Contact");
         searchContactData = contactList;
     }
 
@@ -88,7 +82,7 @@ else
         if (!string.IsNullOrEmpty(SearchString))
         {
             contactList = searchContactData
-                .Where(x => x.Name.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1)
+                .Where(x => x.DisplayName.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1)
                 .ToList();
         }
         else
