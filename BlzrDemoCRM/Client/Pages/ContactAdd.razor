@@ -50,7 +50,7 @@
     public int contactId { get; set; }
     protected string Title = "Add";
     protected Contact contact = new();
-    protected override async Task OnParameterSetAsync()
+    protected override async Task OnParametersSetAsync()
     {
         if (contactId != 0)
         {
@@ -58,7 +58,7 @@
             contact = await Http.GetFromJsonAsync<Contact>("api/Contact/" + contactId);
         }
     }
-    protected async Task SaveUser()
+    protected async Task SaveContact()
     {
         if (contact.Id != 0)
         {
